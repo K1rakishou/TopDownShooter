@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ContentModelStore">
+    <e p="C:\Users\kirakishou\.Rider2018.1\system\resharper-host\Local\Transient\ReSharperHost\v12\SolutionCaches\_Playground.1528515581.00" t="ExcludeRecursive" />
+    <e p="F:\unity\projects\Playground" t="IncludeRecursive">
+      <e p="Assembly-CSharp.csproj" t="IncludeRecursive" />
+      <e p="Assets" t="Include">
+        <e p="Scripts" t="Include">
+          <e p="Enemies" t="Include">
+            <e p="Enemy.cs" t="Include" />
+            <e p="EnemySpawner.cs" t="Include" />
+            <e p="HurtZone.cs" t="Include" />
+          </e>
+          <e p="GameZone.cs" t="Include" />
+          <e p="Player" t="Include">
+            <e p="CameraFollow.cs" t="Include" />
+            <e p="PlayerController.cs" t="Include" />
+          </e>
+          <e p="Weapons" t="Include">
+            <e p="AssaultRifle.cs" t="Include" />
+            <e p="BaseWeapon.cs" t="Include" />
+            <e p="Bullets" t="Include">
+              <e p="BaseBullet.cs" t="Include" />
+              <e p="Bullet_5x45.cs" t="Include" />
+              <e p="ShotgunPellet.cs" t="Include" />
+            </e>
+            <e p="Shotgun.cs" t="Include" />
+          </e>
+        </e>
+      </e>
+      <e p="Library" t="ExcludeRecursive" />
+      <e p="obj" t="ExcludeRecursive" />
+      <e p="packages" t="ExcludeRecursive" />
+      <e p="Playground.sln" t="IncludeFlat" />
+      <e p="Temp" t="ExcludeRecursive">
+        <e p="bin" t="ExcludeRecursive" />
+      </e>
+    </e>
+  </component>
+</project>
