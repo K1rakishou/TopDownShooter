@@ -24,8 +24,10 @@
             <e p="Bullets" t="Include">
               <e p="BaseBullet.cs" t="Include" />
               <e p="Bullet_5x45.cs" t="Include" />
+              <e p="Bullet_9mm.cs" t="Include" />
               <e p="ShotgunPellet.cs" t="Include" />
             </e>
+            <e p="P250.cs" t="Include" />
             <e p="Shotgun.cs" t="Include" />
           </e>
         </e>
