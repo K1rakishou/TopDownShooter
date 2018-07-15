@@ -4,12 +4,11 @@ using JetBrains.Annotations;
 using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour{
-	[CanBeNull] public PlayerController player;
+	public PlayerController player;
 	public Enemy enemy;
-	public static int counter = 0;
 
 	void Start() {
-		// StartCoroutine(spawnTimer());
+		StartCoroutine(spawnTimer());
 	}
 
 	IEnumerator spawnTimer() {
@@ -20,12 +19,7 @@ public class EnemySpawner : MonoBehaviour{
 	}
 
 	void spawnEmeny() {
-		var playerPositionMaybe = player?.getPlayerPosition();
-		if (!playerPositionMaybe.HasValue) {
-			return;
-		}
-
-		var playerPosition = (Vector3) playerPositionMaybe;
+		var playerPosition = player.getPlayerPosition();
 		var randomPoint = Random.insideUnitCircle;
 		var spawnPosition = new Vector3(randomPoint.x + playerPosition.x, 0f, randomPoint.y + playerPosition.z);
 		spawnPosition += (playerPosition - spawnPosition).normalized * 50f;

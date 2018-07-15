@@ -4,12 +4,12 @@ using Weapons;
 using Random = UnityEngine.Random;
 
 public class Shotgun : BaseWeapon{
-	private float spreadFactor = 100;
+	private float spreadFactor = .01f;
 	private float weaponSpread;
 
 	public ShotgunPellet bullet;
-	public int innerCirclePelletsCount = 3;
-	public int outerCirclePelletsCount = 15;
+	public int innerCirclePelletsCount = 4;
+	public int outerCirclePelletsCount = 8;
 	public float timeBetweenShots = .8f;
 	public Transform firePoint;
 
@@ -22,7 +22,7 @@ public class Shotgun : BaseWeapon{
 	public override void stopShooting() {
 	}
 
-	protected override IEnumerator shoot() {
+	private IEnumerator shoot() {
 		isFiring = true;
 		spawnBullets();
 		yield return new WaitForSeconds(timeBetweenShots);
@@ -31,7 +31,7 @@ public class Shotgun : BaseWeapon{
 
 	private void spawnBullets() {
 		for (var i = 0; i < innerCirclePelletsCount; ++i) {
-			spawnBullet(0.05f);
+			spawnBullet(0.01f);
 		}
 
 		for (var i = 0; i < outerCirclePelletsCount; ++i) {
@@ -39,16 +39,16 @@ public class Shotgun : BaseWeapon{
 		}
 	}
 
-	private void spawnBullet(float minSpread) {
-		weaponSpread = (player.getPlayerSpeed() / spreadFactor) + minSpread;
+	private void spawnBullet(float spread) {
+		weaponSpread = spread;
 		var rotation = firePoint.rotation;
 		rotation.y += Random.Range(-weaponSpread, weaponSpread);
 
 		Instantiate(bullet, firePoint.position, rotation);
 	}
 	
-	public override WeaponType getWeaponType() {
-		return WeaponType.SemiAutomatic;
+	public override WeaponShootType getWeaponShootType() {
+		return WeaponShootType.SemiAutomatic;
 	}
 
 	public override float getWeaponSpread() {

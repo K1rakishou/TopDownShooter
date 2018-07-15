@@ -1,33 +1,73 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using DefaultNamespace.Items;
+using UnityEngine;
 using UnityEngine.UI;
 
+[RequireComponent(typeof(Rigidbody))]
+[RequireComponent(typeof(PlayerController))]
 public class Enemy : MonoBehaviour{
 	private Rigidbody myRigidbody;
 	private PlayerController player;
 	private int currentHealth;
 	private float currentSpeed;
-	private bool isCollectingDamage = false;
+	private bool isInflictingDamage;
+	private int damageTimeout = 1;
+	private float minDistanceToStartHurtingPlayer = 1.75f;
+	private float chanceToDropItem = .1f;
 
-	public HurtZone hurtZone;
+	public Pickable[] items;
 	public Image healthBar;
 	public int maxHealth = 100;
 	public float maxSpeed = 5f;
+	public float acceleration = 5f;
 
 	void Awake() {
 		currentHealth = maxHealth;
 		currentSpeed = maxSpeed;
-		
+		isInflictingDamage = false;
+
 		myRigidbody = GetComponent<Rigidbody>();
 		player = FindObjectOfType<PlayerController>();
 	}
 
 	void FixedUpdate() {
-		var playerPositionMaybe = player.getPlayerPosition();
-		if (!playerPositionMaybe.HasValue) {
+		myRigidbody.velocity = transform.forward * currentSpeed;
+	}
+
+	void Update() {
+		if (player == null) {
 			return;
 		}
 
-		currentSpeed += .05f;
+		if (currentHealth <= 0) {
+			die();
+			return;
+		}
+
+		updateCurrentSpeed();
+
+		if ((transform.position - player.getPlayerPosition()).magnitude < minDistanceToStartHurtingPlayer) {
+			tryToHurtPlayer();
+		}
+	}
+
+	private void tryToHurtPlayer() {
+		if (!isInflictingDamage) {
+			isInflictingDamage = true;
+			StartCoroutine(hurtPlayer());
+		}
+	}
+
+	private IEnumerator hurtPlayer() {
+		player.takeDamage(10);
+		slowDown(90f);
+
+		yield return new WaitForSeconds(damageTimeout);
+		isInflictingDamage = false;
+	}
+
+	private void updateCurrentSpeed() {
+		currentSpeed += acceleration * Time.deltaTime;
 		if (currentSpeed > maxSpeed) {
 			currentSpeed = maxSpeed;
 		}
@@ -37,30 +77,26 @@ public class Enemy : MonoBehaviour{
 		}
 
 		transform.LookAt(player.transform.position);
-		myRigidbody.velocity = transform.forward * currentSpeed;
-	}
-	
-	void Update() {
-		if (player == null) {
-			return;
-		}
-
-		if (currentHealth <= 0) {
-			Destroy(gameObject);
-		}
 	}
 
-	public void hurtEnemy(BaseBullet bullet, int damage) {
-		applyDamage(bullet, damage);
-	}
-
-	private void applyDamage(BaseBullet bullet, int damage) {
-		var playerPositionMaybe = player.getPlayerPosition();
-		if (!playerPositionMaybe.HasValue) {
-			return;
+	private void die() {
+		if (Random.Range(0f, 1f) <= chanceToDropItem) {
+			spawnItem();
 		}
 
-		var playerPosition = (Vector3) playerPositionMaybe;
+		Destroy(gameObject);
+	}
+
+	private void spawnItem() {
+		Instantiate(items[0], transform.position, transform.rotation);
+	}
+
+	public void hurtEnemy(BaseBullet bullet) {
+		takeDamage(bullet, bullet.getBaseDamage());
+	}
+
+	private void takeDamage(BaseBullet bullet, int damage) {
+		var playerPosition = player.getPlayerPosition();
 		var stoppingFactor = bullet.getStoppingFactor();
 		var enemyPosition = transform.position;
 		var distanceVector = playerPosition - enemyPosition;
@@ -68,16 +104,16 @@ public class Enemy : MonoBehaviour{
 		var resultVector = distanceVectorNormalized * stoppingFactor;
 
 		currentHealth -= damage;
-		currentSpeed -= maxSpeed;
-		if (currentSpeed < 1f) {
-			currentSpeed = 1f;
-		}
+		slowDown(10f);
 
 		healthBar.fillAmount = currentHealth / (float) maxHealth;
 		myRigidbody.AddForce(-resultVector, ForceMode.Force);
 	}
 
-	public void slowDown() {
-		currentSpeed -= ((maxSpeed / 100) * 90);
+	public void slowDown(float percent) {
+		currentSpeed -= ((maxSpeed / 100f) * percent);
+		if (currentSpeed < 1f) {
+			currentSpeed = 1f;
+		}
 	}
 }

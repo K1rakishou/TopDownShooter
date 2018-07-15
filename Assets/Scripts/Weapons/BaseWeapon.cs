@@ -7,8 +7,15 @@ namespace Weapons{
 		protected bool isFiring;
 		protected PlayerController player;
 
-		protected void Start() {
+		protected virtual void Start() {
 			player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
+		}
+		
+		protected virtual void Update() {
+			
+		}
+		
+		protected virtual void OnGUI() {
 		}
 
 		public virtual void startShooting() {
@@ -17,11 +24,10 @@ namespace Weapons{
 		public virtual void stopShooting() {
 		}
 
-		public abstract WeaponType getWeaponType();
+		public abstract WeaponShootType getWeaponShootType();
 		public abstract float getWeaponSpread();
-		protected abstract IEnumerator shoot();
 
-		public enum WeaponType{
+		public enum WeaponShootType{
 			Automatic,
 			SemiAutomatic
 		}

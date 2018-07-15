@@ -63,7 +63,7 @@ public class PlayerController : MonoBehaviour{
 		var moveInput = new Vector3(Input.GetAxisRaw("Horizontal"), 0f, Input.GetAxisRaw("Vertical"));
 		return moveInput * currentSpeed;
 	}
- 
+
 	private void zoomCamera(bool zoomIn) {
 		if (zoomIn) {
 			mainCamera.transform.position = Vector3.Lerp(mainCamera.transform.position, cameraZoomedIn, .2f);
