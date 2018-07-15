@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
 using Weapons;
+using Weapons.Projectiles;
 using Random = UnityEngine.Random;
 
 public class Shotgun : BaseWeapon{
@@ -13,13 +14,13 @@ public class Shotgun : BaseWeapon{
 	public float timeBetweenShots = .6f;
 	public Transform firePoint;
 
-	public override void startShooting() {
+	public override void fireButtonPressed() {
 		if (!isFiring) {
 			StartCoroutine(shoot());
 		}
 	}
 
-	public override void stopShooting() {
+	public override void fireButtonReleased() {
 	}
 
 	private IEnumerator shoot() {

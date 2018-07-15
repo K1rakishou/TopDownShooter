@@ -1,6 +1,6 @@
 ﻿using System.Collections;
 using UnityEngine;
-using Weapons.Bullets;
+using Weapons.Projectiles;
 
 namespace Weapons{
 
@@ -18,13 +18,13 @@ namespace Weapons{
 			base.Update();
 		}
 
-		public override void startShooting() {
+		public override void fireButtonPressed() {
 			if (!isFiring) {
 				StartCoroutine(shoot());
 			}
 		}
 
-		public override void stopShooting() {
+		public override void fireButtonReleased() {
 		}
 		
 		private void updateSpread() {

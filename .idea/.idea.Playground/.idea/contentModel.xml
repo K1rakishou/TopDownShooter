@@ -22,13 +22,15 @@
           <e p="Weapons" t="Include">
             <e p="AssaultRifle.cs" t="Include" />
             <e p="BaseWeapon.cs" t="Include" />
-            <e p="Bullets" t="Include">
-              <e p="BaseBullet.cs" t="Include" />
+            <e p="Grenade.cs" t="Include" />
+            <e p="P250.cs" t="Include" />
+            <e p="Projectiles" t="Include">
+              <e p="BaseProjectile.cs" t="Include" />
               <e p="Bullet_5x45.cs" t="Include" />
               <e p="Bullet_9mm.cs" t="Include" />
+              <e p="GrenadeFragment.cs" t="Include" />
               <e p="ShotgunPellet.cs" t="Include" />
             </e>
-            <e p="P250.cs" t="Include" />
             <e p="Shotgun.cs" t="Include" />
           </e>
         </e>

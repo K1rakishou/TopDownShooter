@@ -9,7 +9,7 @@ public class PlayerController : MonoBehaviour{
 	
 	private Rigidbody myRigidBody;
 	private Vector3 velocity;
-	private Vector3 mousePosition;
+	private Vector3 pointToLook;
 	private Camera mainCamera;
 	private int currentHealth;
 	private float currentSpeed;
@@ -65,13 +65,7 @@ public class PlayerController : MonoBehaviour{
 	}
 
 	private void zoomCamera(bool zoomIn) {
-		var newCameraPos = mainCamera.transform.position;
-		
-		if (zoomIn) {
-			newCameraPos = Vector3.Lerp(mainCamera.transform.position, cameraZoomedIn, .2f);
-		} else {
-			newCameraPos = Vector3.Lerp(mainCamera.transform.position, cameraZoomedOut, .2f);
-		}
+		var newCameraPos = Vector3.Lerp(mainCamera.transform.position, zoomIn ? cameraZoomedIn : cameraZoomedOut, .2f);
 
 		newCameraPos.x = mainCamera.transform.position.x;
 		newCameraPos.z = mainCamera.transform.position.z;
@@ -79,13 +73,12 @@ public class PlayerController : MonoBehaviour{
 	}
 
 	private void handleMouseInput() {
-		mousePosition = Input.mousePosition;
-		
+		var mousePosition = Input.mousePosition;
 		var cameraRay = mainCamera.ScreenPointToRay(mousePosition);
 		var groundPlane = new Plane(Vector3.up, Vector3.zero);
 
 		if (groundPlane.Raycast(cameraRay, out var rayLength)) {
-			var pointToLook = cameraRay.GetPoint(rayLength);
+			pointToLook = cameraRay.GetPoint(rayLength);
 			transform.LookAt(new Vector3(pointToLook.x, transform.position.y, pointToLook.z));
 		}
 
@@ -95,17 +88,17 @@ public class PlayerController : MonoBehaviour{
 		
 		if (currentWeapon.getWeaponShootType() == BaseWeapon.WeaponShootType.SemiAutomatic) {
 			if (Input.GetMouseButtonDown(0)) {
-				currentWeapon.startShooting();
+				currentWeapon.fireButtonPressed();
 			}
 
 			if (Input.GetMouseButtonUp(0)) {
-				currentWeapon.stopShooting();
+				currentWeapon.fireButtonReleased();
 			}
 		} else if (currentWeapon.getWeaponShootType() == BaseWeapon.WeaponShootType.Automatic) {
 			if (Input.GetMouseButton(0)) {
-				currentWeapon.startShooting();
+				currentWeapon.fireButtonPressed();
 			} else {
-				currentWeapon.stopShooting();
+				currentWeapon.fireButtonReleased();
 			}
 		}
 	}
@@ -157,6 +150,10 @@ public class PlayerController : MonoBehaviour{
 		}
 
 		return myRigidBody.position;
+	}
+
+	public Vector3 getPointToLook() {
+		return pointToLook;
 	}
 
 	public BaseWeapon getCurrentWeapon() {

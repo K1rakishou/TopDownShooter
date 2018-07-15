@@ -31,7 +31,7 @@ namespace Enemies{
 				new SpawnWave(200, .3f, 0)
 			};
 			
-			StartCoroutine(spawnTimer());
+			// StartCoroutine(spawnTimer());
 		}
 
 		IEnumerator spawnTimer() {

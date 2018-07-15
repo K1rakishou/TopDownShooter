@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
 using Weapons;
+using Weapons.Projectiles;
 using Random = UnityEngine.Random;
 
 public class AssaultRifle : BaseWeapon{
@@ -28,13 +29,13 @@ public class AssaultRifle : BaseWeapon{
 		base.Update();
 	}
 
-	public override void startShooting() {
+	public override void fireButtonPressed() {
 		if (!isFiring) {
 			StartCoroutine(shoot());
 		}
 	}
 
-	public override void stopShooting() {
+	public override void fireButtonReleased() {
 	}
 
 	private void updateSpread() {

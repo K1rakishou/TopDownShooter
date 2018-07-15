@@ -4,6 +4,7 @@ using Items;
 using UnityEngine;
 using UnityEngine.UI;
 using Weapons;
+using Weapons.Projectiles;
 
 namespace Enemies{
 
@@ -114,20 +115,20 @@ namespace Enemies{
 			}
 		}
 
-		public void hurtEnemy(BaseBullet bullet) {
-			takeDamage(bullet, bullet.getBaseDamage());
+		public void hurtEnemy(BaseProjectile projectile) {
+			takeDamage(projectile, projectile.getBaseDamage());
 		}
 
-		private void takeDamage(BaseBullet bullet, int damage) {
+		private void takeDamage(BaseProjectile projectile, int damage) {
 			var playerPosition = player.getPlayerPosition();
-			var pushbackFactor = bullet.getPushbackFactor();
+			var pushbackFactor = projectile.getPushbackFactor();
 			var enemyPosition = transform.position;
 			var distanceVector = playerPosition - enemyPosition;
 			var distanceVectorNormalized = distanceVector.normalized;
 			var resultVector = distanceVectorNormalized * pushbackFactor;
 			myRigidbody.AddForce(-resultVector, ForceMode.Force);
 			
-			var percent = 100f / (bullet.getMaxStoppingFactor() / bullet.getStoppingFactor());
+			var percent = 100f / (projectile.getMaxStoppingFactor() / projectile.getStoppingFactor());
 			slowDown(percent);
 			updateHealth(damage);
 		}

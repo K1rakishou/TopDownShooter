@@ -14,10 +14,10 @@ namespace Weapons{
 			
 		}
 		
-		public virtual void startShooting() {
+		public virtual void fireButtonPressed() {
 		}
 
-		public virtual void stopShooting() {
+		public virtual void fireButtonReleased() {
 		}
 
 		public abstract WeaponShootType getWeaponShootType();
@@ -32,7 +32,8 @@ namespace Weapons{
 		public enum Weapon{
 			P250,
 			AssaultRifle,
-			Shotgun
+			Shotgun,
+			Grenade
 		}
 	}
 

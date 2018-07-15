@@ -1,6 +1,6 @@
-﻿namespace Weapons.Bullets{
+﻿namespace Weapons.Projectiles{
 
-	public class Bullet_9mm : BaseBullet{
+	public class Bullet_9mm : BaseProjectile{
 		private float speedDrag = 100f;
 		private float stoppingFactor = 200f;
 		private float pushBackFactor = 300f;
