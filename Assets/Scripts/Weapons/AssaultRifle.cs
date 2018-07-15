@@ -1,16 +1,18 @@
 ﻿using System.Collections;
 using UnityEngine;
 using Weapons;
+using Random = UnityEngine.Random;
 
 public class AssaultRifle : BaseWeapon{
-	private const float minSpread = .001f;
-	private const float maxSpread = .01f;
+	private const float minSpread = .005f;
+	private const float maxSpread = .05f;
+	private const float addDeltaSpread = maxSpread * 2;
+	private const float subDeltaSpread = maxSpread * 3;
 	private const float shotsPerMinute = 750f;
 	private const float oneMinute = 60f;
 	private const float fireRate = shotsPerMinute / oneMinute;
 	private float timeBetweenShots;
-	private float spreadFactor = minSpread;
-	private float weaponSpread;
+	private float weaponSpread = minSpread;
 
 	public Bullet_5x45 bullet;
 	public Transform firePoint;
@@ -37,14 +39,14 @@ public class AssaultRifle : BaseWeapon{
 
 	private void updateSpread() {
 		if (isFiring) {
-			spreadFactor += .015f * Time.deltaTime;
-			if (spreadFactor > maxSpread) {
-				spreadFactor = maxSpread;
+			weaponSpread += addDeltaSpread * Time.deltaTime;
+			if (weaponSpread > maxSpread) {
+				weaponSpread = maxSpread;
 			}
 		} else {
-			spreadFactor -= .06f * Time.deltaTime;
-			if (spreadFactor < minSpread) {
-				spreadFactor = minSpread;
+			weaponSpread -= subDeltaSpread * Time.deltaTime;
+			if (weaponSpread < minSpread) {
+				weaponSpread = minSpread;
 			}
 		}
 	}
@@ -57,14 +59,20 @@ public class AssaultRifle : BaseWeapon{
 	}
 
 	private void spawnBullet() {
-		weaponSpread = player.getPlayerSpeed() * spreadFactor;
-		if (weaponSpread < .01f) {
-			weaponSpread = .01f;
+		var newWeaponSpread = weaponSpread;
+		var playerSpeed = player.getPlayerSpeed();
+		
+		if (playerSpeed <= .1f) {
+			newWeaponSpread /= 5f;
 		}
-
+		
+		if (playerSpeed > .1f && playerSpeed <= player.getPlayerAimingSpeed()) {
+			newWeaponSpread /= 3f;
+		}
+		
 		var rotation = firePoint.rotation;
-		rotation.y += Random.Range(-weaponSpread, weaponSpread);
-
+		rotation.y += Random.Range(-newWeaponSpread, newWeaponSpread);
+		
 		Instantiate(bullet, firePoint.position, rotation);
 	}
 

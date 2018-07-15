@@ -100,22 +100,6 @@ public class PlayerController : MonoBehaviour{
 		}
 	}
 
-	public float getPlayerMaxSpeed() {
-		return maxSpeed;
-	}
-	
-	public float getPlayerSpeed() {
-		return myRigidBody.velocity.magnitude;
-	}
-
-	public Vector3 getPlayerPosition() {
-		if (myRigidBody == null) {
-			return Vector3.zero;
-		}
-
-		return myRigidBody.position;
-	}
-	
 	public void takeDamage(int damage) {
 		currentHealth -= damage;
 		updateHealthBar();
@@ -132,5 +116,25 @@ public class PlayerController : MonoBehaviour{
 
 	private void updateHealthBar() {
 		healthBar.fillAmount = (float) currentHealth / (float) maxHealth;
+	}
+	
+	public float getPlayerMaxSpeed() {
+		return maxSpeed;
+	}
+
+	public float getPlayerAimingSpeed() {
+		return aimingSpeed;
+	}
+	
+	public float getPlayerSpeed() {
+		return myRigidBody.velocity.magnitude;
+	}
+
+	public Vector3 getPlayerPosition() {
+		if (myRigidBody == null) {
+			return Vector3.zero;
+		}
+
+		return myRigidBody.position;
 	}
 }
