@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Weapons{
 
@@ -15,9 +14,6 @@ namespace Weapons{
 			
 		}
 		
-		protected virtual void OnGUI() {
-		}
-
 		public virtual void startShooting() {
 		}
 
@@ -25,11 +21,18 @@ namespace Weapons{
 		}
 
 		public abstract WeaponShootType getWeaponShootType();
+		public abstract Weapon getWeaponType();
 		public abstract float getWeaponSpread();
 
 		public enum WeaponShootType{
 			Automatic,
 			SemiAutomatic
+		}
+
+		public enum Weapon{
+			P250,
+			AssaultRifle,
+			Shotgun
 		}
 	}
 

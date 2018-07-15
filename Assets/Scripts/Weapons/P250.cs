@@ -69,6 +69,10 @@ namespace Weapons{
 			return WeaponShootType.SemiAutomatic;
 		}
 
+		public override Weapon getWeaponType() {
+			return Weapon.P250;
+		}
+
 		public override float getWeaponSpread() {
 			return weaponSpread;
 		}

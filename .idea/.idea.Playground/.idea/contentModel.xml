@@ -13,6 +13,7 @@
           <e p="Items" t="Include">
             <e p="Medkit.cs" t="Include" />
             <e p="Pickable.cs" t="Include" />
+            <e p="WeaponBox.cs" t="Include" />
           </e>
           <e p="Player" t="Include">
             <e p="CameraFollow.cs" t="Include" />

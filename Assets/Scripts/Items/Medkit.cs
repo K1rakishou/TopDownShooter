@@ -1,11 +1,8 @@
-﻿using System.Diagnostics;
-using DefaultNamespace.Items;
-using Debug = UnityEngine.Debug;
+﻿using Items;
 
 public class Medkit : Pickable {
 
 	protected override void apply(PlayerController player) {
 		player.heal(50);
-		Debug.Log("Picked up medkit");
 	}
 }

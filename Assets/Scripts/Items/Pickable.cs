@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace DefaultNamespace.Items{
+namespace Items{
 
 	public abstract class Pickable : MonoBehaviour{
 

@@ -83,6 +83,10 @@ public class PlayerController : MonoBehaviour{
 			transform.LookAt(new Vector3(pointToLook.x, transform.position.y, pointToLook.z));
 		}
 
+		if (currentWeapon == null) {
+			return;
+		}
+		
 		if (currentWeapon.getWeaponShootType() == BaseWeapon.WeaponShootType.SemiAutomatic) {
 			if (Input.GetMouseButtonDown(0)) {
 				currentWeapon.startShooting();
@@ -112,6 +116,17 @@ public class PlayerController : MonoBehaviour{
 		}
 		
 		updateHealthBar();
+	}
+
+	public void replaceWeapon(BaseWeapon weapon) {
+		var newWeapon = Instantiate(weapon);
+
+		newWeapon.transform.parent = currentWeapon.transform.parent;
+		newWeapon.transform.position = currentWeapon.transform.position;
+		newWeapon.transform.rotation = currentWeapon.transform.rotation;
+		Destroy(currentWeapon.gameObject);
+
+		currentWeapon = newWeapon;
 	}
 
 	private void updateHealthBar() {

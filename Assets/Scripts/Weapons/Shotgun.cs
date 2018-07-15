@@ -51,6 +51,10 @@ public class Shotgun : BaseWeapon{
 		return WeaponShootType.SemiAutomatic;
 	}
 
+	public override Weapon getWeaponType() {
+		return Weapon.Shotgun;
+	}
+
 	public override float getWeaponSpread() {
 		return weaponSpread;
 	}

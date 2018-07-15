@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Enemies;
+using UnityEngine;
 
 public abstract class BaseBullet : MonoBehaviour{
 	protected PlayerController player;

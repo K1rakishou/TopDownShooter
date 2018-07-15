@@ -204,10 +204,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   items:
   - {fileID: 114002277741050416, guid: 16d8ebe5eefd5cc41b4ac9180013f409, type: 2}
+  - {fileID: 114483237119883382, guid: 6709f88c34e4b8149bf79793f9afca2f, type: 2}
   healthBar: {fileID: 114902619872270088}
   maxHealth: 100
   maxSpeed: 5
   acceleration: 5
+  chanceToDropItem: 0.5
 --- !u!114 &114902619872270088
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -80,6 +80,10 @@ public class AssaultRifle : BaseWeapon{
 		return WeaponShootType.Automatic;
 	}
 
+	public override Weapon getWeaponType() {
+		return Weapon.AssaultRifle;
+	}
+
 	public override float getWeaponSpread() {
 		return weaponSpread;
 	}
