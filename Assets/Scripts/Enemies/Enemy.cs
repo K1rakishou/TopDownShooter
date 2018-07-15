@@ -93,8 +93,6 @@ namespace Enemies{
 		
 			if (player.currentWeapon.getWeaponType() == BaseWeapon.Weapon.P250) {
 				var weaponDropChance = Random.Range(0, 3);
-				Debug.Log($"weaponDropChance = {weaponDropChance}");
-				
 				if (weaponDropChance == 0) {
 					var weaponBox = items.First(item => item is WeaponBox) as WeaponBox;
 					if (weaponBox == null) {
@@ -106,8 +104,6 @@ namespace Enemies{
 				}
 			} else {
 				var itemDropChance = Random.Range(0f, 1f);
-				Debug.Log($"itemDropChance = {itemDropChance}");
-				
 				if (itemDropChance <= chanceToDropItem) {
 					itemToInstantiate = items[Random.Range(0, items.Length)];
 				}

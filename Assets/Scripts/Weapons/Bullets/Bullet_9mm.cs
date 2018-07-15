@@ -2,11 +2,11 @@
 
 	public class Bullet_9mm : BaseBullet{
 		private float speedDrag = 60f;
-		private float stoppingFactor = 100f;
+		private float stoppingFactor = 150f;
 		private float penetrationFactor = .2f;
 
 		public const float baseSpeed = 110f;
-		public const int baseDamage = 8;
+		public const int baseDamage = 10;
 
 		public override float getBaseSpeed() {
 			return baseSpeed;

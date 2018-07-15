@@ -3,6 +3,11 @@
 namespace Items{
 
 	public abstract class Pickable : MonoBehaviour{
+		private int maxLifeTime = 5;
+		
+		private void Start() {
+			Destroy(gameObject, maxLifeTime);
+		}
 
 		private void OnTriggerEnter(Collider other) {
 			if (other.gameObject.CompareTag("Player")) {

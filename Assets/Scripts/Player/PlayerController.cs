@@ -152,4 +152,8 @@ public class PlayerController : MonoBehaviour{
 
 		return myRigidBody.position;
 	}
+
+	public BaseWeapon getCurrentWeapon() {
+		return currentWeapon;
+	}
 }

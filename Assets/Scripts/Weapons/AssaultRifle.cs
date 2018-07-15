@@ -5,7 +5,7 @@ using Random = UnityEngine.Random;
 
 public class AssaultRifle : BaseWeapon{
 	private const float minSpread = .005f;
-	private const float maxSpread = .05f;
+	private const float maxSpread = .06f;
 	private const float addDeltaSpread = maxSpread * 2;
 	private const float subDeltaSpread = maxSpread * 3;
 	private const float shotsPerMinute = 750f;

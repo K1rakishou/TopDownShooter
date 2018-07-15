@@ -8,9 +8,9 @@ public class Shotgun : BaseWeapon{
 	private float weaponSpread;
 
 	public ShotgunPellet bullet;
-	public int innerCirclePelletsCount = 4;
-	public int outerCirclePelletsCount = 8;
-	public float timeBetweenShots = .8f;
+	public int innerCirclePelletsCount = 5;
+	public int outerCirclePelletsCount = 10;
+	public float timeBetweenShots = .6f;
 	public Transform firePoint;
 
 	public override void startShooting() {
@@ -31,11 +31,11 @@ public class Shotgun : BaseWeapon{
 
 	private void spawnBullets() {
 		for (var i = 0; i < innerCirclePelletsCount; ++i) {
-			spawnBullet(0.01f);
+			spawnBullet(0.03f);
 		}
 
 		for (var i = 0; i < outerCirclePelletsCount; ++i) {
-			spawnBullet(0.1f);
+			spawnBullet(0.2f);
 		}
 	}
 
