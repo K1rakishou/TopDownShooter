@@ -45,10 +45,10 @@ public class PlayerController : MonoBehaviour{
 		float currentMaxSpeed = 0f;
 		if (Input.GetMouseButton(1)) {
 			currentMaxSpeed = aimingSpeed;
-			// zoomCamera(true);
+			zoomCamera(true);
 		} else {
 			currentMaxSpeed = maxSpeed;
-			// zoomCamera(false);
+			zoomCamera(false);
 		}
 		
 		currentSpeed += currentMaxSpeed * Time.deltaTime;
@@ -65,11 +65,17 @@ public class PlayerController : MonoBehaviour{
 	}
 
 	private void zoomCamera(bool zoomIn) {
+		var newCameraPos = mainCamera.transform.position;
+		
 		if (zoomIn) {
-			mainCamera.transform.position = Vector3.Lerp(mainCamera.transform.position, cameraZoomedIn, .2f);
+			newCameraPos = Vector3.Lerp(mainCamera.transform.position, cameraZoomedIn, .2f);
 		} else {
-			mainCamera.transform.position = Vector3.Lerp(mainCamera.transform.position, cameraZoomedOut, .2f);
+			newCameraPos = Vector3.Lerp(mainCamera.transform.position, cameraZoomedOut, .2f);
 		}
+
+		newCameraPos.x = mainCamera.transform.position.x;
+		newCameraPos.z = mainCamera.transform.position.z;
+		mainCamera.transform.position = newCameraPos;
 	}
 
 	private void handleMouseInput() {

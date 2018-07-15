@@ -1,12 +1,7 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class CameraFollow : MonoBehaviour{
 	public Transform target;
-
-	void Start() {
-	}
 
 	void FixedUpdate() {
 		if (target == null) {
