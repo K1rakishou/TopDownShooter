@@ -1,8 +1,9 @@
 ﻿namespace Weapons.Bullets{
 
 	public class Bullet_9mm : BaseBullet{
-		private float speedDrag = 60f;
-		private float stoppingFactor = 150f;
+		private float speedDrag = 100f;
+		private float stoppingFactor = 200f;
+		private float pushBackFactor = 300f;
 		private float penetrationFactor = .2f;
 
 		public const float baseSpeed = 110f;
@@ -18,6 +19,10 @@
 
 		public override float getStoppingFactor() {
 			return stoppingFactor;
+		}
+
+		public override float getPushbackFactor() {
+			return pushBackFactor;
 		}
 
 		public override float getSpeedDrag() {

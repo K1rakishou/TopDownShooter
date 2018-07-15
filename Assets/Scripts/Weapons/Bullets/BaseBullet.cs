@@ -2,11 +2,13 @@
 using UnityEngine;
 
 public abstract class BaseBullet : MonoBehaviour{
+	private float maxStoppingFactor = 1000f;
+	private Vector3 bulletVelocity;
+	
 	protected PlayerController player;
 	protected float currentSpeed;
 	protected float minBulletSpeed;
 
-	private Vector3 bulletVelocity;
 	public LayerMask layerMask;
 
 	protected virtual void Start() {
@@ -81,9 +83,14 @@ public abstract class BaseBullet : MonoBehaviour{
 		return currentSpeed;
 	}
 
+	public float getMaxStoppingFactor() {
+		return maxStoppingFactor;
+	}
+
 	public abstract float getBaseSpeed();
 	public abstract int getBaseDamage();
 	public abstract float getStoppingFactor();
+	public abstract float getPushbackFactor();
 	public abstract float getSpeedDrag();
 	public abstract float getPenetrationFactor();
 }

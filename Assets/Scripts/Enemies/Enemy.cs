@@ -120,16 +120,16 @@ namespace Enemies{
 
 		private void takeDamage(BaseBullet bullet, int damage) {
 			var playerPosition = player.getPlayerPosition();
-			var stoppingFactor = bullet.getStoppingFactor();
+			var pushbackFactor = bullet.getPushbackFactor();
 			var enemyPosition = transform.position;
 			var distanceVector = playerPosition - enemyPosition;
 			var distanceVectorNormalized = distanceVector.normalized;
-			var resultVector = distanceVectorNormalized * stoppingFactor;
-		
-			slowDown(10f);
-			updateHealth(damage);
-		
+			var resultVector = distanceVectorNormalized * pushbackFactor;
 			myRigidbody.AddForce(-resultVector, ForceMode.Force);
+			
+			var percent = 100f / (bullet.getMaxStoppingFactor() / bullet.getStoppingFactor());
+			slowDown(percent);
+			updateHealth(damage);
 		}
 
 		private void updateHealth(int damage) {
@@ -139,6 +139,7 @@ namespace Enemies{
 
 		public void slowDown(float percent) {
 			currentSpeed -= ((maxSpeed / 100f) * percent);
+			
 			if (currentSpeed < 1f) {
 				currentSpeed = 1f;
 			}

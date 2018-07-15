@@ -1,6 +1,7 @@
 ﻿public class ShotgunPellet : BaseBullet{
 	private float speedDrag = 50f;
-	private float stoppingFactor = 10f;
+	private float stoppingFactor = 100f;
+	private float pushBackFactor = 100f;
 	private float penetrationFactor = .4f;
 
 	public const float baseSpeed = 120f;
@@ -16,6 +17,10 @@
 
 	public override float getStoppingFactor() {
 		return stoppingFactor;
+	}
+	
+	public override float getPushbackFactor() {
+		return pushBackFactor;
 	}
 
 	public override float getSpeedDrag() {

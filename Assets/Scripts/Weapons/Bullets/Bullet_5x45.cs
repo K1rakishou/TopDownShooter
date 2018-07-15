@@ -1,6 +1,7 @@
 ﻿public class Bullet_5x45 : BaseBullet{
 	private float speedDrag = 30f;
 	private float stoppingFactor = 500f;
+	private float pushBackFactor = 500f;
 	private float penetrationFactor = .6f;
 
 	public const float baseSpeed = 150f;
@@ -16,6 +17,10 @@
 
 	public override float getStoppingFactor() {
 		return stoppingFactor;
+	}
+
+	public override float getPushbackFactor() {
+		return pushBackFactor;
 	}
 
 	public override float getSpeedDrag() {
