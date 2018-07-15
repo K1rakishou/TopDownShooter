@@ -167,6 +167,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bullet: {fileID: 114279589652644794, guid: de08bef49b4f7d741b4be38e8db60184, type: 2}
-  bulletSpeed: 50
-  timeBetweenShots: 0.1
   firePoint: {fileID: 4856151397075454}

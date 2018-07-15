@@ -167,7 +167,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bullet: {fileID: 114199601609172556, guid: e72294a0cb859824bbcaf63f356fe978, type: 2}
-  innerCirclePelletsCount: 5
-  outerCirclePelletsCount: 10
-  timeBetweenShots: 0.3
+  innerCirclePelletsCount: 4
+  outerCirclePelletsCount: 8
+  timeBetweenShots: 0.7
   firePoint: {fileID: 4772198563015578}

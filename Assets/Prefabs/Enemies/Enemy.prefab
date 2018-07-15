@@ -209,7 +209,7 @@ MonoBehaviour:
   maxHealth: 100
   maxSpeed: 5
   acceleration: 5
-  chanceToDropItem: 0.5
+  chanceToDropItem: 0.1
 --- !u!114 &114902619872270088
 MonoBehaviour:
   m_ObjectHideFlags: 1

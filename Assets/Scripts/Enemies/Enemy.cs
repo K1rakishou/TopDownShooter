@@ -23,7 +23,7 @@ namespace Enemies{
 		public int maxHealth = 100;
 		public float maxSpeed = 5f;
 		public float acceleration = 5f;
-		public float chanceToDropItem = .5f;
+		public float chanceToDropItem = .1f;
 
 		void Awake() {
 			currentHealth = maxHealth;
@@ -84,33 +84,38 @@ namespace Enemies{
 		}
 
 		private void die() {
-			var randomValue = Random.Range(0f, 1f);
-			Debug.Log($"randomValue = {randomValue}");
-			
-			if (randomValue <= chanceToDropItem) {
-				Debug.Log("Spawning an item");
-				spawnItem();
-			}
-
+			tryToSpawnItem();
 			Destroy(gameObject);
 		}
 
-		private void spawnItem() {
-			Pickable itemToInstantiate;
+		private void tryToSpawnItem() {
+			Pickable itemToInstantiate = null;
 		
 			if (player.currentWeapon.getWeaponType() == BaseWeapon.Weapon.P250) {
-				var weaponBox = items.First(item => item is WeaponBox) as WeaponBox;
-				if (weaponBox == null) {
-					Debug.LogError("WeaponBox is NULL!!!");
-					return;
-				}
+				var weaponDropChance = Random.Range(0, 3);
+				Debug.Log($"weaponDropChance = {weaponDropChance}");
+				
+				if (weaponDropChance == 0) {
+					var weaponBox = items.First(item => item is WeaponBox) as WeaponBox;
+					if (weaponBox == null) {
+						Debug.LogError("WeaponBox is NULL!!!");
+						return;
+					}
 			
-				itemToInstantiate = weaponBox;
+					itemToInstantiate = weaponBox;
+				}
 			} else {
-				itemToInstantiate = items[Random.Range(0, items.Length)];
+				var itemDropChance = Random.Range(0f, 1f);
+				Debug.Log($"itemDropChance = {itemDropChance}");
+				
+				if (itemDropChance <= chanceToDropItem) {
+					itemToInstantiate = items[Random.Range(0, items.Length)];
+				}
 			}
 
-			Instantiate(itemToInstantiate, transform.position, transform.rotation);
+			if (itemToInstantiate != null) {
+				Instantiate(itemToInstantiate, transform.position, transform.rotation);
+			}
 		}
 
 		public void hurtEnemy(BaseBullet bullet) {
