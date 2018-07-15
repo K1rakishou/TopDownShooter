@@ -45,10 +45,10 @@ public class PlayerController : MonoBehaviour{
 		float currentMaxSpeed = 0f;
 		if (Input.GetMouseButton(1)) {
 			currentMaxSpeed = aimingSpeed;
-			zoomCamera(true);
+			// zoomCamera(true);
 		} else {
 			currentMaxSpeed = maxSpeed;
-			zoomCamera(false);
+			// zoomCamera(false);
 		}
 		
 		currentSpeed += currentMaxSpeed * Time.deltaTime;

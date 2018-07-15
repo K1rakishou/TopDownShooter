@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 224058442272010486}
   - component: {fileID: 222981317593782744}
   - component: {fileID: 114902619872270088}
-  m_Layer: 5
+  m_Layer: 9
   m_Name: HealthBar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -41,7 +41,7 @@ GameObject:
   - component: {fileID: 136603252010497778}
   - component: {fileID: 54525328505828102}
   - component: {fileID: 114737364512642910}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Enemy
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -58,27 +58,8 @@ GameObject:
   - component: {fileID: 224031454402089100}
   - component: {fileID: 222892742186018562}
   - component: {fileID: 114967952689200184}
-  m_Layer: 5
+  m_Layer: 9
   m_Name: HealthBackground
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!1 &1325554949679468
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 4627225492184660}
-  - component: {fileID: 33569956538730254}
-  - component: {fileID: 23923173275661048}
-  - component: {fileID: 65746180560527470}
-  - component: {fileID: 114125444045165054}
-  m_Layer: 0
-  m_Name: HurtZone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -95,7 +76,7 @@ GameObject:
   - component: {fileID: 223125571592096388}
   - component: {fileID: 114480997782431214}
   - component: {fileID: 114079806395732058}
-  m_Layer: 5
+  m_Layer: 9
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -113,23 +94,9 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 224245623978026178}
-  - {fileID: 4627225492184660}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 147.66801, z: 0}
---- !u!4 &4627225492184660
-Transform:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1325554949679468}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0.514}
-  m_LocalScale: {x: 0.6485628, y: 1, z: 0.26314348}
-  m_Children: []
-  m_Father: {fileID: 4288360408460820}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!23 &23083197863288322
 MeshRenderer:
   m_ObjectHideFlags: 1
@@ -165,48 +132,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!23 &23923173275661048
-MeshRenderer:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1325554949679468}
-  m_Enabled: 0
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RenderingLayerMask: 4294967295
-  m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 0
-  m_SelectedEditorRenderState: 3
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
---- !u!33 &33569956538730254
-MeshFilter:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1325554949679468}
-  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!33 &33826477767294452
 MeshFilter:
   m_ObjectHideFlags: 1
@@ -229,18 +154,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
---- !u!65 &65746180560527470
-BoxCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1325554949679468}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &114079806395732058
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -257,18 +170,6 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
---- !u!114 &114125444045165054
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1325554949679468}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 03bbbdb15819c9b47996f924390a8f2e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  enemy: {fileID: 114737364512642910}
 --- !u!114 &114480997782431214
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -301,10 +202,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac106599d7f25754abfc0c9f53a15367, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hurtZone: {fileID: 114125444045165054}
+  items:
+  - {fileID: 114002277741050416, guid: 16d8ebe5eefd5cc41b4ac9180013f409, type: 2}
   healthBar: {fileID: 114902619872270088}
   maxHealth: 100
   maxSpeed: 5
+  acceleration: 5
 --- !u!114 &114902619872270088
 MonoBehaviour:
   m_ObjectHideFlags: 1

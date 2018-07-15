@@ -102,12 +102,16 @@ public class Enemy : MonoBehaviour{
 		var distanceVector = playerPosition - enemyPosition;
 		var distanceVectorNormalized = distanceVector.normalized;
 		var resultVector = distanceVectorNormalized * stoppingFactor;
-
-		currentHealth -= damage;
+		
 		slowDown(10f);
-
-		healthBar.fillAmount = currentHealth / (float) maxHealth;
+		updateHealth(damage);
+		
 		myRigidbody.AddForce(-resultVector, ForceMode.Force);
+	}
+
+	private void updateHealth(int damage) {
+		currentHealth -= damage;
+		healthBar.fillAmount = currentHealth / (float) maxHealth;
 	}
 
 	public void slowDown(float percent) {

@@ -50,7 +50,6 @@ public abstract class BaseBullet : MonoBehaviour{
 			var ray = new Ray(point1, point2 - point1);
 			if (Physics.Raycast(ray, out var hitResult, (point2 - point1).magnitude, layerMask)) {
 				if (handleHit(hitResult)) {
-
 					if (Random.Range(0f, 1f) > (1f - penetrationFactor)) {
 						return handleBulletFly(hitResult.point, deltaSpeed, penetrationDampening * 2, penetrationFactor / 2);
 					}
@@ -69,6 +68,7 @@ public abstract class BaseBullet : MonoBehaviour{
 	private bool handleHit(RaycastHit hitResult) {
 		var enemyComponent = hitResult.collider.gameObject.GetComponent<Enemy>();
 		if (enemyComponent == null) {
+			Debug.LogWarning($"Enemy has no Enemy component! object name = {hitResult.collider.gameObject.name}");
 			return false;
 		}
 

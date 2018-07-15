@@ -9,9 +9,11 @@
           <e p="Enemies" t="Include">
             <e p="Enemy.cs" t="Include" />
             <e p="EnemySpawner.cs" t="Include" />
-            <e p="HurtZone.cs" t="Include" />
           </e>
-          <e p="GameZone.cs" t="Include" />
+          <e p="Items" t="Include">
+            <e p="Medkit.cs" t="Include" />
+            <e p="Pickable.cs" t="Include" />
+          </e>
           <e p="Player" t="Include">
             <e p="CameraFollow.cs" t="Include" />
             <e p="PlayerController.cs" t="Include" />
