@@ -3,8 +3,13 @@ using UnityEngine.UI;
 using Weapons;
 
 public class PlayerController : MonoBehaviour{
+	private Vector3 cameraZoomedIn = new Vector3(0f, 14f, -3f);
+	private Vector3 cameraZoomedOut = new Vector3(0f, 20f, -5);
+	private float cameraZoomSpeed = 2f;
+	
 	private Rigidbody myRigidBody;
 	private Vector3 velocity;
+	private Vector3 mousePosition;
 	private Camera mainCamera;
 	private int currentHealth;
 	private float currentSpeed;
@@ -31,36 +36,46 @@ public class PlayerController : MonoBehaviour{
 			Destroy(gameObject);
 			return;
 		}
-
-		float currentMaxSpeed = maxSpeed;
-		if (Input.GetMouseButton(1)) {
-			currentMaxSpeed = aimingSpeed;
-		} else {
-			currentMaxSpeed = maxSpeed;
-		}
-		
-		var moveInput = new Vector3(Input.GetAxisRaw("Horizontal"), 0f, Input.GetAxisRaw("Vertical"));
-		
+	
+		velocity = updatePlayerVelocity();
 		handleMouseInput();
-
-		velocity = updatePlayerVelocity(moveInput, currentMaxSpeed);
 	}
 
-	private Vector3 updatePlayerVelocity(Vector3 moveInput, float _maxSpeed) {
-		currentSpeed += _maxSpeed * Time.deltaTime;
+	private Vector3 updatePlayerVelocity() {
+		float currentMaxSpeed = 0f;
+		if (Input.GetMouseButton(1)) {
+			currentMaxSpeed = aimingSpeed;
+			zoomCamera(true);
+		} else {
+			currentMaxSpeed = maxSpeed;
+			zoomCamera(false);
+		}
+		
+		currentSpeed += currentMaxSpeed * Time.deltaTime;
 		if (currentSpeed <= 0f) {
 			currentSpeed = 0f;
 		}
 
-		if (currentSpeed >= _maxSpeed) {
-			currentSpeed = _maxSpeed;
+		if (currentSpeed >= currentMaxSpeed) {
+			currentSpeed = currentMaxSpeed;
 		}
 		
+		var moveInput = new Vector3(Input.GetAxisRaw("Horizontal"), 0f, Input.GetAxisRaw("Vertical"));
 		return moveInput * currentSpeed;
+	}
+ 
+	private void zoomCamera(bool zoomIn) {
+		if (zoomIn) {
+			mainCamera.transform.position = Vector3.Lerp(mainCamera.transform.position, cameraZoomedIn, .2f);
+		} else {
+			mainCamera.transform.position = Vector3.Lerp(mainCamera.transform.position, cameraZoomedOut, .2f);
+		}
 	}
 
 	private void handleMouseInput() {
-		var cameraRay = mainCamera.ScreenPointToRay(Input.mousePosition);
+		mousePosition = Input.mousePosition;
+		
+		var cameraRay = mainCamera.ScreenPointToRay(mousePosition);
 		var groundPlane = new Plane(Vector3.up, Vector3.zero);
 
 		if (groundPlane.Raycast(cameraRay, out var rayLength)) {
@@ -68,7 +83,7 @@ public class PlayerController : MonoBehaviour{
 			transform.LookAt(new Vector3(pointToLook.x, transform.position.y, pointToLook.z));
 		}
 
-		if (currentWeapon.getWeaponType() == BaseWeapon.WeaponType.SemiAutomatic) {
+		if (currentWeapon.getWeaponShootType() == BaseWeapon.WeaponShootType.SemiAutomatic) {
 			if (Input.GetMouseButtonDown(0)) {
 				currentWeapon.startShooting();
 			}
@@ -76,7 +91,7 @@ public class PlayerController : MonoBehaviour{
 			if (Input.GetMouseButtonUp(0)) {
 				currentWeapon.stopShooting();
 			}
-		} else if (currentWeapon.getWeaponType() == BaseWeapon.WeaponType.Automatic) {
+		} else if (currentWeapon.getWeaponShootType() == BaseWeapon.WeaponShootType.Automatic) {
 			if (Input.GetMouseButton(0)) {
 				currentWeapon.startShooting();
 			} else {
@@ -85,11 +100,6 @@ public class PlayerController : MonoBehaviour{
 		}
 	}
 
-	public void takeDamage(int damage) {
-		currentHealth -= damage;
-		healthBar.fillAmount = (float) currentHealth / (float) maxHealth;
-	}
-	
 	public float getPlayerMaxSpeed() {
 		return maxSpeed;
 	}
@@ -98,11 +108,29 @@ public class PlayerController : MonoBehaviour{
 		return myRigidBody.velocity.magnitude;
 	}
 
-	public Vector3? getPlayerPosition() {
+	public Vector3 getPlayerPosition() {
 		if (myRigidBody == null) {
-			return null;
+			return Vector3.zero;
 		}
 
 		return myRigidBody.position;
+	}
+	
+	public void takeDamage(int damage) {
+		currentHealth -= damage;
+		updateHealthBar();
+	}
+
+	public void heal(int health) {
+		currentHealth += health;
+		if (currentHealth > maxHealth) {
+			currentHealth = maxHealth;
+		}
+		
+		updateHealthBar();
+	}
+
+	private void updateHealthBar() {
+		healthBar.fillAmount = (float) currentHealth / (float) maxHealth;
 	}
 }
